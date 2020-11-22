@@ -1,19 +1,16 @@
 <template>
   <div id="app" class="container">
     <a href="/" class="site-title">Vue To Do List App</a>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
     <TodoList />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import TodoList from './components/TodoList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     TodoList
   }
 }

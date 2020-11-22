@@ -3,7 +3,7 @@
     <input type="text" class="input-todo" v-model="newTodo" placeholder="Add a Todo" @keyup.enter="addTodo">
     <div>
       <div class="todo-status">
-        <h3>Active Todos</h3>
+        <h3>Todos</h3>
       </div>
       <div class="todo-list-item" v-for="(todo, index) in todos" :key="todo.id">
         <div class="todo-item-name">
@@ -22,6 +22,7 @@
         </div>
       </div>
       <br>
+      <hr>
       <div class="bulk-remove-section">
         <div class="select-completed">
           <input type="checkbox" @change="selectAll"><span>Select All</span>
@@ -81,7 +82,8 @@ export default {
       this.todos.push({
         id: this.newTodoId,
         name: this.newTodo,
-        isCompleted: false
+        isCompleted: false,
+        editMode: false
       })
 
       this.newTodo = ""
