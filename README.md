@@ -1,27 +1,21 @@
-# vue.js-todo-list-app
+<h3>Vue.js To Do List App<h3>
 
-## Project setup
-```
-npm install
-```
+<h6>It’s a To List App. Vue.js technology has been used to bulid this web app.</h6>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# vue.js-toDo-list-app
-# Vue.js-To-Do-List-App
-# Vue.js-To-Do-List-App
+<h3>Technology Used:</h3>
+<ul>
+    <li>
+        <h5>Vue.js</h5>
+    </li>
+    <li>
+        <h5>JavaScript</h5>
+    </li>
+    <li>
+        <h5>HTML</h5>
+    </li>
+    <li>
+        <h5>CSS</h5>
+    </li>
+    
+</ul>
+<a target="_blank" href="https://masrursakib-vuejs-todo-list-app.netlify.app/">Live Website Link</a>
