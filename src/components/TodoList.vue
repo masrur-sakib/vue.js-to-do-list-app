@@ -12,7 +12,7 @@
         <h3>Todos</h3>
       </div>
       <div>
-        <button class="button" @click="status = 'active'">
+        <button class="button" @click="status = 'active'" autofocus>
           Active
         </button>
         <button class="button" @click="status = 'completed'">
@@ -235,5 +235,8 @@ export default {
   margin: 10px;
   padding: 10px;
   cursor: pointer;
+}
+.button:focus{
+    background-color: greenyellow;
 }
 </style>
