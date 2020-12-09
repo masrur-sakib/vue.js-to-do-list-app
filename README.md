@@ -1,11 +1,14 @@
 <h3>Vue.js To Do List App<h3>
 
-<h6>It’s a To List App. Vue.js technology has been used to bulid this web app.</h6>
+<h6>It’s a To List App. Vue.js, Vuex technology has been used to bulid this web app.</h6>
 
 <h3>Technology Used:</h3>
 <ul>
     <li>
         <h5>Vue.js</h5>
+    </li>
+    <li>
+        <h5>Vuex</h5>
     </li>
     <li>
         <h5>JavaScript</h5>
