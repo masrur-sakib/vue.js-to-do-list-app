@@ -12,14 +12,18 @@
         <h3>Todos</h3>
       </div>
       <div>
-        <button class="button" @click="status = 'active'" autofocus>
+        <button class="button" @click="changeStatus('active')" autofocus>
           Active
         </button>
-        <button class="button" @click="status = 'completed'">
+        <button class="button" @click="changeStatus('completed')">
           Completed
         </button>
       </div>
-      <div class="todo-list-item" v-for="(todo, index) in filterTodos" :key="todo.id">
+      <div
+        class="todo-list-item"
+        v-for="(todo, index) in filterTodos"
+        :key="todo.id"
+      >
         <div class="todo-item-name">
           <div class="todo-item-name-checkbox">
             <input type="checkbox" v-model="todo.isCompleted" />
@@ -52,9 +56,13 @@
       <div class="bulk-remove-section">
         <div class="select-completed" v-if="showSelectAllBtn">
           <input type="checkbox" @change="selectAll" /><span>Select All</span>
-        </div>        
+        </div>
         <div>
-          <button class="button" v-if="showRemoveAllBtn" @click="removeAllCompleted">
+          <button
+            class="button-remove"
+            v-if="showRemoveAllBtn"
+            @click="removeAllCompleted"
+          >
             Remove All
           </button>
         </div>
@@ -71,45 +79,22 @@ export default {
       newTodo: "",
       newTodoId: 4,
       beforeEditName: "",
-      status: "active",
-      todos: [
-        {
-          id: 1,
-          name: "First Task",
-          isCompleted: true,
-          editMode: false,
-        },
-        {
-          id: 2,
-          name: "Second Task",
-          isCompleted: false,
-          editMode: false,
-        },
-        {
-          id: 3,
-          name: "Third Task",
-          isCompleted: false,
-          editMode: false,
-        },
-      ],
     };
   },
 
-    computed: {
+  computed: {
+    status() {
+      return this.$store.state.status
+    },
     filterTodos() {
-      if (this.status == 'active') {
-        return this.todos.filter(todo => !todo.isCompleted)
-      } else if (this.status == 'completed') {
-        return this.todos.filter(todo => todo.isCompleted)
-      }
-      return !this.todo.isCompleted
+      return this.$store.getters.filterTodos
     },
-    showRemoveAllBtn(){
-      return this.status == "completed"
+    showRemoveAllBtn() {
+      return this.$store.getters.showRemoveAllBtn;
     },
-    showSelectAllBtn(){
-      return this.status == "active"
-    }
+    showSelectAllBtn() {
+      return this.$store.getters.showSelectAllBtn;
+    },
   },
 
   directives: {
@@ -125,7 +110,7 @@ export default {
       if (this.newTodo.trim().length == 0) {
         return;
       } else {
-        this.todos.push({
+        this.$store.commit('addTodo', {
           id: this.newTodoId,
           name: this.newTodo,
           isCompleted: false,
@@ -136,26 +121,24 @@ export default {
         this.newTodoId++;
       }
     },
+    changeStatus(status){
+      this.$store.commit("changeStatus", status)
+    },
     editTodo(todo) {
       this.beforeEditName = todo.name;
       todo.editMode = true;
     },
     editComplete(todo) {
-      if (todo.name.trim().length == 0) {
-        todo.name = this.beforeEditName;
-      }
-      todo.editMode = false;
+      this.$store.commit('editComplete', todo);
     },
     removeTodo(index) {
-      this.todos.splice(index, 1);
+      this.$store.commit('removeTodo', index);
     },
     selectAll() {
-      this.todos.forEach((todo) => {
-        todo.isCompleted = event.target.checked;
-      });
+      this.$store.commit('selectAll', event.target.checked)
     },
     removeAllCompleted() {
-      this.todos = this.todos.filter((todo) => !todo.isCompleted);
+      this.$store.commit('removeAllCompleted')
     },
   },
 };
@@ -236,7 +219,12 @@ export default {
   padding: 10px;
   cursor: pointer;
 }
-.button:focus{
-    background-color: greenyellow;
+.button:focus {
+  background-color: greenyellow;
+}
+.button-remove{
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
 }
 </style>
