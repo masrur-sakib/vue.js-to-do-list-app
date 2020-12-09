@@ -40,6 +40,6 @@ export default {
   display: block;
   text-align: center;
   font-size: 20px;
-  color: navy;
+  color: #409EFF;
 }
 </style>
