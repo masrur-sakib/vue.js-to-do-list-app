@@ -12,12 +12,23 @@
         <h3>Todos</h3>
       </div>
       <div>
-        <button class="button" @click="changeStatus('active')" autofocus>
-          Active
-        </button>
-        <button class="button" @click="changeStatus('completed')">
-          Completed
-        </button>
+        <el-row>
+          <el-button
+            class="button"
+            type="primary"
+            plain
+            @click="changeStatus('active')"
+            autofocus
+            >Active</el-button
+          >
+          <el-button
+            class="button"
+            type="primary"
+            plain
+            @click="changeStatus('completed')"
+            >Completed</el-button
+          >
+        </el-row>
       </div>
       <div
         class="todo-list-item"
@@ -55,16 +66,13 @@
       <hr />
       <div class="bulk-remove-section">
         <div class="select-completed" v-if="showSelectAllBtn">
-          <input type="checkbox" @change="selectAll" /><span>Select All</span>
+          <el-checkbox class="checkbox-select-all" size="medium" border @change="selectAll">Select All</el-checkbox>
         </div>
         <div>
-          <button
-            class="button-remove"
-            v-if="showRemoveAllBtn"
-            @click="removeAllCompleted"
-          >
-            Remove All
-          </button>
+          <el-row>
+            <el-button class="button-remove" type="danger" v-if="showRemoveAllBtn"
+            @click="removeAllCompleted">Remove All</el-button>
+          </el-row>
         </div>
       </div>
     </div>
@@ -84,10 +92,10 @@ export default {
 
   computed: {
     status() {
-      return this.$store.state.status
+      return this.$store.state.status;
     },
     filterTodos() {
-      return this.$store.getters.filterTodos
+      return this.$store.getters.filterTodos;
     },
     showRemoveAllBtn() {
       return this.$store.getters.showRemoveAllBtn;
@@ -110,7 +118,7 @@ export default {
       if (this.newTodo.trim().length == 0) {
         return;
       } else {
-        this.$store.commit('addTodo', {
+        this.$store.commit("addTodo", {
           id: this.newTodoId,
           name: this.newTodo,
           isCompleted: false,
@@ -121,24 +129,24 @@ export default {
         this.newTodoId++;
       }
     },
-    changeStatus(status){
-      this.$store.commit("changeStatus", status)
+    changeStatus(status) {
+      this.$store.commit("changeStatus", status);
     },
     editTodo(todo) {
       this.beforeEditName = todo.name;
       todo.editMode = true;
     },
     editComplete(todo) {
-      this.$store.commit('editComplete', todo);
+      this.$store.commit("editComplete", todo);
     },
     removeTodo(index) {
-      this.$store.commit('removeTodo', index);
+      this.$store.commit("removeTodo", index);
     },
     selectAll() {
-      this.$store.commit('selectAll', event.target.checked)
+      this.$store.commit("selectAll", event.target.checked);
     },
     removeAllCompleted() {
-      this.$store.commit('removeAllCompleted')
+      this.$store.commit("removeAllCompleted");
     },
   },
 };
@@ -219,12 +227,14 @@ export default {
   padding: 10px;
   cursor: pointer;
 }
-.button:focus {
-  background-color: greenyellow;
-}
-.button-remove{
+.button-remove {
   margin: 10px;
   padding: 10px;
   cursor: pointer;
+}
+.checkbox-select-all{
+  margin: 10px;
+  padding: 10px;
+  background: #40a0ff2c;
 }
 </style>
