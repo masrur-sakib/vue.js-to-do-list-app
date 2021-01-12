@@ -32,8 +32,9 @@
       </div>
       <div
         class="todo-list-item"
-        v-for="(todo, index) in filterTodos"
+        v-for="todo in filterTodos"
         :key="todo.id"
+        :todo="todo"
       >
         <div class="todo-item-name">
           <div class="todo-item-name-checkbox">
@@ -60,7 +61,7 @@
             />
           </div>
         </div>
-        <div class="remove-todo-item" @click="removeTodo(index)">&#10060;</div>
+        <div class="remove-todo-item" @click="removeTodo(todo.id)">&#10060;</div>
       </div>
       <br />
       <hr />
@@ -139,8 +140,8 @@ export default {
     editComplete(todo) {
       this.$store.commit("editComplete", todo);
     },
-    removeTodo(index) {
-      this.$store.commit("removeTodo", index);
+    removeTodo(id) {
+      this.$store.commit("removeTodo", id);
     },
     selectAll() {
       this.$store.commit("selectAll", event.target.checked);
